@@ -1,0 +1,59 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf200
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;\red38\green38\blue38;\red52\green110\blue183;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}
+{\list\listtemplateid2\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid101\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid2}
+{\list\listtemplateid3\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid201\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid3}
+{\list\listtemplateid4\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid301\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid4}
+{\list\listtemplateid5\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid401\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid5}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}{\listoverride\listid2\listoverridecount0\ls2}{\listoverride\listid3\listoverridecount0\ls3}{\listoverride\listid4\listoverridecount0\ls4}{\listoverride\listid5\listoverridecount0\ls5}}
+\margl1440\margr1440\vieww16880\viewh8460\viewkind0
+\deftab720
+\pard\pardeftab720\sa300
+
+\f0\fs30 \cf2 Source of the original data: {\field{\*\fldinst{HYPERLINK "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"}}{\fldrslt \cf3 https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip}} . Original description: {\field{\*\fldinst{HYPERLINK "http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones"}}{\fldrslt \cf3 http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones}}\
+The attached R script (run_analysis.R) performs the following to clean up the data:\
+\pard\tx220\tx720\pardeftab720\li720\fi-720
+\ls1\ilvl0\cf2 {\listtext	\'95	}1. Merges the training and test sets to create one data set, namely:\
+\pard\tx720\pardeftab720
+\cf2 A function(assemble_data) was created to merge the files associated with \'93test\'94 and \'93train\'94 and avoid moving files or repetitive  entry of file paths.  This function returns a data frame combining \'93y\'94(activity IDs), \'93subject\'94(subject IDs), and \'93x\'94(data) for test and train with feature names for the data attached. \
+\
+Two data frames were created with the \'93assemble_data\'94 function:\
+test_set with 2947 observations and 563 variables\
+train_set with 7352 observations and 563 variables\
+\
+These two data frames were then merged to create one data set (dat) with 10299 observations and 563 variables.\
+\
+\
+\
+\pard\tx220\tx720\pardeftab720\li720\fi-720
+\ls2\ilvl0\cf2 {\listtext	\'95	}2.  Extracts only the measurements on the mean and standard deviation for each measurement.\
+\pard\pardeftab720\sa300
+\cf2 The result is a 10299 x 68 data frame, because only 66 out of 561 data (x) attributes are measurements on the mean and standard deviation. All measurements appear to be floating point numbers in the range (-1, 1).\
+\pard\tx220\tx720\pardeftab720\li720\fi-720
+\ls3\ilvl0\cf2 {\listtext	\'95	}3. Reads activity_labels.txt and applies descriptive activity names to name the activities in the data set:\
+\pard\pardeftab720\sa300
+\cf2 walking\
+walkingupstairs\
+walkingdownstairs\
+sitting\
+standing\
+laying\
+\pard\tx220\tx720\pardeftab720\li720\fi-720
+\ls4\ilvl0\cf2 {\listtext	\'95	}4. The script also appropriately labels the data set with descriptive names: all feature names (attributes) and activity names are converted to lower case, underscores and brackets () are removed.\
+\pard\tx720\pardeftab720
+\cf2 \
+\pard\pardeftab720\sa300
+\cf2 The result is saved as merged_data.csv, a 10299x68 data frame such that the first column contains activity names, the second column subject IDs, and the last 66 columns are measurements. Subject IDs are integers between 1 and 30 inclusive. Names of the measurements are similar to the following:\
+tbodyacc-mean-x\
+tbodyacc-mean-y\
+tbodyacc-mean-z\
+tbodyacc-std-x\
+tbodyacc-std-y\
+tbodyacc-std-z\
+tgravityacc-mean-x\
+tgravityacc-mean-y\
+\pard\tx220\tx720\pardeftab720\li720\fi-720
+\ls5\ilvl0\cf2 {\listtext	\'95	}5. Finally, the script creates a 2nd, independent tidy data set with the average of each measurement for each activity and each subject.\
+\pard\pardeftab720
+\cf2 The result is saved as \'93tidy_SamsungDS_Coursera.txt\'94 or \'93tidy_SamsungDS_Coursera.csv\'94, a 180x68 data frame, where as before, the first column contains activity names(see point 3 above), the second column contains subject IDs, and then the averages for each of the 66 measurements are in columns 3...68. There are 30 subjects and 6 activities, thus 180 rows in this data set with averages.}
